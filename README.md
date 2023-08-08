@@ -35,6 +35,7 @@ The SQL Employee Tracker is a command-line application built with Node.js, Inqui
 ## Demo
 
 Please find a video demonstration of the application's functionality
+[link to the walkthrough video](https://drive.google.com/file/d/1GdcOT9BTH5TzFB_ZUWR340euSGrd9BuU/view?usp=sharing)
 
 ## Contributing
 
