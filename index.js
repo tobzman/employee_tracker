@@ -1,22 +1,19 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 
-// Create a MySQL connection
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "127.0.0.1",
   user: "root",
-  password: "your_mysql_password",
+  password: "",
   database: "employee_db",
 });
 
-// Connect to the database
 connection.connect((err) => {
   if (err) throw err;
   console.log("Connected to the database.");
   startApp();
 });
 
-// Function to display the main menu and handle user choices
 function startApp() {
   inquirer
     .prompt([
@@ -70,9 +67,6 @@ function startApp() {
     });
 }
 
-// Implement functions for each action (viewAllDepartments, viewAllRoles, etc.)
-
-// Example function to view all departments
 function viewAllDepartments() {
   connection.query("SELECT * FROM department", (err, departments) => {
     if (err) throw err;
@@ -81,7 +75,6 @@ function viewAllDepartments() {
   });
 }
 
-// Example function to add a department
 function addDepartment() {
   inquirer
     .prompt([
@@ -110,13 +103,9 @@ function addDepartment() {
     });
 }
 
-// Implement other functions for remaining actions (viewAllRoles, viewAllEmployees, addRole, addEmployee, updateEmployeeRole)
-
-// Start the application
 function init() {
   console.log("Welcome to the SQL Employee Tracker!");
   startApp();
 }
 
-// Call the init function to start the application
 init();
