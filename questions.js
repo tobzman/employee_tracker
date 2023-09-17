@@ -1,115 +1,133 @@
-const inquirer = require("inquirer");
+function validateInput(input, errorMessage) {
+  if (input) {
+    return true;
+  }
+  return errorMessage;
+}
 
-const questions = {
-  mainMenu: [
-    {
-      type: "list",
-      name: "menuOption",
-      message: "What would you like to do?",
-      choices: [
-        "View all departments",
-        "View all roles",
-        "View all employees",
-        "Add a department",
-        "Add a role",
-        "Add an employee",
-        "Update an employee role",
-        "Exit",
-      ],
-    },
-  ],
+const menuQuestions = [
+  {
+    type: "list",
+    name: "options",
+    message: "Select an option:",
+    choices: [
+      "View All Departments",
+      "View All Roles",
+      "View All Employees",
+      "Add a Department",
+      "Add a Role",
+      "Add an Employee",
+      "Update an Employee",
+    ],
+  },
+];
 
-  addDepartment: [
-    {
-      type: "input",
-      name: "departmentName",
-      message: "Enter the name of the department:",
-      validate: (input) => {
-        if (input.trim() === "") {
-          return "Please enter a valid department name.";
-        }
-        return true;
-      },
+const addDepartmentQuestions = [
+  {
+    type: "text",
+    name: "department",
+    message: "Enter the new department name:",
+    validate: function (input) {
+      return validateInput(input, "Please enter a department name.");
     },
-  ],
+  },
+];
 
-  addRole: [
-    {
-      type: "input",
-      name: "roleTitle",
-      message: "Enter the title of the role:",
-      validate: (input) => {
-        if (input.trim() === "") {
-          return "Please enter a valid role title.";
-        }
-        return true;
-      },
+const addRoleQuestions = [
+  {
+    type: "text",
+    name: "roleName",
+    message: "Enter the new role name:",
+    validate: function (input) {
+      return validateInput(input, "Please enter a role name.");
     },
-    {
-      type: "input",
-      name: "roleSalary",
-      message: "Enter the salary for this role(must be numeric)...",
-      validate: (input) => {
-        if (isNaN(input)) {
-          return "Please enter a valid number for the salary.";
-        }
+  },
+  {
+    type: "text",
+    name: "roleSalary",
+    message: "Enter the salary for this role:",
+    validate: function (input) {
+      if (!isNaN(input)) {
         return true;
-      },
+      }
+      return "Please enter a valid number for the salary.";
     },
-    {
-      type: "input",
-      name: "departmentId",
-      message: "Enter the department ID for this role:",
-      validate: (input) => {
-        if (isNaN(input)) {
-          return "Please enter a valid number for the department ID.";
-        }
-        return true;
-      },
-    },
-  ],
+  },
+  {
+    type: "list",
+    name: "roleDepartment",
+    message: "Select the department for this role:",
+    choices: [],
+  },
+];
 
-  addEmployee: [
-    {
-      type: "input",
-      name: "firstName",
-      message: "Enter the employee's first name:",
-      validate: (input) => {
-        if (input.trim() === "") {
-          return "Please enter a valid first name.";
-        }
-        return true;
-      },
+const addEmployeeQuestions = [
+  {
+    type: "text",
+    name: "firstName",
+    message: "Enter the employee's first name:",
+    validate: function (input) {
+      return validateInput(input, "Please enter the employee's first name.");
     },
-    {
-      type: "input",
-      name: "lastName",
-      message: "Enter the employee's last name:",
-      validate: (input) => {
-        if (input.trim() === "") {
-          return "Please enter a valid last name.";
-        }
-        return true;
-      },
-    },
-    {
-      type: "input",
-      name: "mangerId",
-      message: "Enter the employee's manager:",
-      validate: (input) => {
-        if (input.trim() === "") {
-          return "";
-        }
-        return true;
-      },
-    },
+  },
+  {
+    type: "text",
+    name: "lastName",
+    message: "Enter the employee's last name:",
+  },
+  {
+    type: "list",
+    name: "role",
+    message: "Select the employee's role:",
+    choices: [],
+  },
+  {
+    type: "list",
+    name: "manager",
+    message: "Select the employee's manager:",
+    choices: ["None"],
+  },
+];
 
-    // Add additional questions for role selection and manager selection if needed
-  ],
+const updateEmployeeQuestions = [
+  {
+    type: "list",
+    name: "employee",
+    message: "Select the employee to update:",
+    choices: [],
+  },
+  {
+    type: "list",
+    name: "options",
+    message: "What do you want to update for this employee?",
+    choices: ["Update Role", "Update Manager"],
+  },
+];
 
-  updateEmployeeRole: [
-    // Add questions for selecting an employee and their new role
-  ],
+const updateEmployeeRoleQuestion = [
+  {
+    type: "list",
+    name: "role",
+    message: "Select the new role for the employee:",
+    choices: [],
+  },
+];
+
+const updateEmployeeManagerQuestion = [
+  {
+    type: "list",
+    name: "manager",
+    message: "Select the new manager for the employee:",
+    choices: [],
+  },
+];
+
+module.exports = {
+  menuQuestions,
+  addDepartmentQuestions,
+  addEmployeeQuestions,
+  addRoleQuestions,
+  updateEmployeeQuestions,
+  updateEmployeeRoleQuestion,
+  updateEmployeeManagerQuestion,
 };
-
-module.exports = questions;

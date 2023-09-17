@@ -1,4 +1,4 @@
--- Insert data into the department table
+
 INSERT INTO department (id, name) VALUES
   (1, 'Sales'),
   (2, 'Engineering'),
@@ -8,7 +8,6 @@ INSERT INTO department (id, name) VALUES
   (6, 'Operations'),
   (7, 'IT');
 
--- Insert data into the role table
 INSERT INTO role (id, title, salary, department_id) VALUES
   (1, 'Sales Lead', 100000, 1),
   (2, 'Salesperson', 80000, 1),
@@ -19,7 +18,7 @@ INSERT INTO role (id, title, salary, department_id) VALUES
   (7, 'Legal Team Lead', 250000, 4),
   (8, 'Lawyer', 190000, 4);
 
--- Insert data into the employee table
+
 INSERT INTO employee (id, first_name, last_name, age, email, role_id, manager_id) VALUES
   (1, 'John', 'Doe', 30, 'john.doe@example.com', 1, NULL),
   (2, 'Mike', 'Chan', 28, 'mike.chan@example.com', 2, 1),
